@@ -1,12 +1,12 @@
 ---
 - name: install Postfix
-  apt:
+  package:
     name: "{{ item }}"
   with_items:
   - postfix
   - postfix-mysql
   notify: restart postfix
-
+  
 - name: ensure Postfix is started and runs at startup
   service:
     name: postfix

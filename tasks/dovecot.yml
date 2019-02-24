@@ -8,6 +8,16 @@
   - dovecot-lmtpd
   - dovecot-mysql
   notify: restart dovecot
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: install Dovecot
+  package:
+    name: "{{ item }}"
+  with_items:
+  - dovecot
+  - dovecot-mysql
+  notify: restart dovecot
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'Fedora'
 
 - name: ensure Dovecot is started and runs at startup
   service:
